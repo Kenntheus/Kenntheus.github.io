@@ -10,7 +10,7 @@ const PROJECTS = [
     type: "Game Development",
     color: "#00f5c4",
     github: "https://github.com/jairasolis/Shinanaide",
-    image: "src/images/shinanaide.jpg"
+    image: "/images/shinanaide.jpg"
   },
   {
     title: "GameBuddy",
@@ -19,7 +19,7 @@ const PROJECTS = [
     type: "Web Application",
     color: "#7c6eff",
     github: "https://github.com/JorlanPrado/GameBuddy-Livewire",
-    image: "src/images/gamebuddy.png"
+    image: "/images/gamebuddy.png"
   },
   {
     title: "PHINMA Pulse",
@@ -28,7 +28,7 @@ const PROJECTS = [
     type: "Web Application",
     color: "#a8ff78",
     github: "https://github.com/Swa-ne/HATAKONTITANS",
-    image: "src/images/phinmapulse.jpg"
+    image: "/images/phinmapulse.jpg"
   },
   {
     title: "Bilibeads: Accessories",
@@ -37,7 +37,7 @@ const PROJECTS = [
     type: "Website",
     color: "#ff6b6b",
     github: "https://github.com/Kenntheus/Bilibeads",
-    image: "src/images/bilibeads.png"
+    image: "/images/bilibeads.png"
   },
   {
     title: "Dagupan City: NetSec Framework",
@@ -46,7 +46,7 @@ const PROJECTS = [
     type: "Network and Security",
     color: "#ffd93d",
     github: "#",
-    image: "src/images/netsec.png"
+    image: "/images/netsec.png"
   },
   {
     title: "NeTPulse",
@@ -231,7 +231,7 @@ export default function Portfolio() {
   const [activeSkillCat, setActiveSkillCat] = useState("Programming");
 
   // ── Profile photo: replace null with your image path e.g. "src/images/profile.jpg"
-  const PROFILE_IMAGE = "src/images/kenn.jpg";
+  const PROFILE_IMAGE = "/images/kenn.jpg";
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1800);
