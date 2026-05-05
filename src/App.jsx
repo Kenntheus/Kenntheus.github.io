@@ -437,67 +437,124 @@ function LearningCard({ T, index }) {
 
 // ─── HEADER ───────────────────────────────────────────────────────────────────
 function Header({ dark, T, onToggle, page, onNav }) {
-  return (
-    <div style={{
-      background:T.bgCard, borderBottom:`1px solid ${T.border}`,
-      padding:"26px 0", marginBottom:28,
-      position:"sticky", top:0, zIndex:100,
-      backdropFilter:"blur(12px)",
-    }}>
-      <div style={{ maxWidth:1020, margin:"0 auto", padding:"0 24px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
-        {/* Profile — clicking goes home on sub-pages */}
-        <div
-          onClick={() => onNav("home")}
-          style={{ display:"flex", alignItems:"center", gap:20, cursor: page !== "home" ? "pointer" : "default" }}
-        >
-          <ProfilePhoto dark={dark} size={110}/>
-          <div>
-            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:5 }}>
-              <h1 style={{ fontSize:22, fontWeight:800, color:T.text, fontFamily:FONT, letterSpacing:-0.5 }}>
-                Martheus Kenn Banaag
-              </h1>
-              <div style={{ width:18, height:18, borderRadius:"50%", background:T.accent, display:"flex", alignItems:"center", justifyContent:"center" }}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+  // On sub-pages show a slim sticky nav instead of the full hero
+  if (page !== "home") {
+    return (
+      <div style={{
+        background:T.bgCard, borderBottom:`1px solid ${T.border}`,
+        padding:"14px 0", marginBottom:28,
+        position:"sticky", top:0, zIndex:100,
+        backdropFilter:"blur(12px)",
+      }}>
+        <div style={{ maxWidth:1020, margin:"0 auto", padding:"0 24px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+          <div onClick={() => onNav("home")} style={{ display:"flex", alignItems:"center", gap:12, cursor:"pointer" }}>
+            <ProfilePhoto dark={dark} size={40}/>
+            <div>
+              <div style={{ display:"flex", alignItems:"center", gap:7 }}>
+                <span style={{ fontSize:14, fontWeight:800, color:T.text, fontFamily:FONT }}>Martheus Kenn Banaag</span>
+                <div style={{ width:13, height:13, borderRadius:"50%", background:T.accent, display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <svg width="7" height="7" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
               </div>
-            </div>
-            <div style={{ fontSize:12.5, color:T.textMuted, marginBottom:7, display:"flex", alignItems:"center", gap:5, fontFamily:FONT }}>
-              <span>📍</span> Aguilar, Pangasinan, Philippines
-            </div>
-            <div style={{ fontSize:12.5, color:T.textMuted, fontFamily:FONT, letterSpacing:0.3 }}>
-              IT Graduate · Developer · Network Engineer
+              <div style={{ fontSize:11, color:T.textMuted, fontFamily:FONT }}>IT Graduate · Developer · Network Engineer</div>
             </div>
           </div>
-        </div>
-
-        <div style={{ display:"flex", gap:8, alignItems:"center", flexWrap:"wrap" }}>
-          <a href="mailto:kenntheus24@gmail.com"
-            style={{
-              padding:"9px 18px", borderRadius:8, fontSize:12, fontFamily:FONT,
+          <div style={{ display:"flex", gap:8, alignItems:"center" }}>
+            <a href="mailto:kenntheus24@gmail.com" style={{
+              padding:"7px 14px", borderRadius:8, fontSize:11, fontFamily:FONT,
               background:T.accent, color:"#000", textDecoration:"none", fontWeight:600, letterSpacing:0.5,
-              transition:"opacity 0.15s",
-            }}
-            onMouseEnter={e => e.currentTarget.style.opacity="0.85"}
-            onMouseLeave={e => e.currentTarget.style.opacity="1"}
-          >Send Email</a>
-          <a href="https://github.com/Kenntheus" target="_blank" rel="noreferrer"
-            style={{
-              padding:"9px 18px", borderRadius:8, fontSize:12, fontFamily:FONT,
-              background:"transparent", color:T.textMuted, textDecoration:"none",
-              border:`1px solid ${T.border}`, letterSpacing:0.5, transition:"all 0.15s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor=T.accent+"66"; e.currentTarget.style.color=T.text; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor=T.border; e.currentTarget.style.color=T.textMuted; }}
-          >GitHub ↗</a>
+            }}>Send Email</a>
+            <button onClick={onToggle} style={{
+              width:34, height:34, borderRadius:8, background:T.tag, border:`1px solid ${T.border}`,
+              cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center", fontSize:14,
+            }}>{dark ? "☀️" : "🌙"}</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Home: large hero profile section (not sticky)
+  return (
+    <div style={{ background:T.bgCard, borderBottom:`1px solid ${T.border}`, marginBottom:36 }}>
+      <div style={{ maxWidth:1020, margin:"0 auto", padding:"48px 24px 40px" }}>
+        <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:24, flexWrap:"wrap" }}>
+
+          {/* Left: photo + info */}
+          <div style={{ display:"flex", alignItems:"center", gap:28 }}>
+            <ProfilePhoto dark={dark} size={160}/>
+            <div>
+              {/* Name row */}
+              <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:8 }}>
+                <h1 style={{ fontSize:32, fontWeight:800, color:T.text, fontFamily:FONT, letterSpacing:-1, lineHeight:1.1 }}>
+                  Martheus Kenn Banaag
+                </h1>
+                <div style={{ width:22, height:22, borderRadius:"50%", background:T.accent, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div style={{ fontSize:13, color:T.textMuted, marginBottom:8, display:"flex", alignItems:"center", gap:6, fontFamily:FONT }}>
+                <span>📍</span> Aguilar, Pangasinan, Philippines
+              </div>
+
+              {/* Role tag */}
+              <div style={{ fontSize:14, color:T.textMuted, fontFamily:FONT, letterSpacing:0.2, marginBottom:20 }}>
+                IT Graduate &nbsp;·&nbsp; Developer &nbsp;·&nbsp; Network Engineer
+              </div>
+
+              {/* Action buttons */}
+              <div style={{ display:"flex", gap:10, alignItems:"center", flexWrap:"wrap" }}>
+                <a href="mailto:kenntheus24@gmail.com" style={{
+                  display:"inline-flex", alignItems:"center", gap:7,
+                  padding:"10px 20px", borderRadius:9, fontSize:12.5, fontFamily:FONT,
+                  background:T.accent, color:"#000", textDecoration:"none", fontWeight:700, letterSpacing:0.4,
+                  transition:"opacity 0.15s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity="0.85"}
+                onMouseLeave={e => e.currentTarget.style.opacity="1"}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#000" strokeWidth="2"/><polyline points="22,6 12,13 2,6" stroke="#000" strokeWidth="2"/></svg>
+                  Send Email
+                </a>
+                <a href="https://github.com/Kenntheus" target="_blank" rel="noreferrer" style={{
+                  display:"inline-flex", alignItems:"center", gap:7,
+                  padding:"10px 20px", borderRadius:9, fontSize:12.5, fontFamily:FONT,
+                  background:"transparent", color:T.textMuted, textDecoration:"none",
+                  border:`1px solid ${T.border}`, letterSpacing:0.4, transition:"all 0.15s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor=T.accent+"66"; e.currentTarget.style.color=T.text; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor=T.border; e.currentTarget.style.color=T.textMuted; }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  GitHub ↗
+                </a>
+                <a href="https://linkedin.com/in/martheus-kenn-banaag" target="_blank" rel="noreferrer" style={{
+                  display:"inline-flex", alignItems:"center", gap:7,
+                  padding:"10px 20px", borderRadius:9, fontSize:12.5, fontFamily:FONT,
+                  background:"transparent", color:T.textMuted, textDecoration:"none",
+                  border:`1px solid ${T.border}`, letterSpacing:0.4, transition:"all 0.15s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor=T.accent+"66"; e.currentTarget.style.color=T.text; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor=T.border; e.currentTarget.style.color=T.textMuted; }}
+                >LinkedIn ↗</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: theme toggle */}
           <button onClick={onToggle} style={{
-            width:38, height:38, borderRadius:8,
+            width:40, height:40, borderRadius:9,
             background:T.tag, border:`1px solid ${T.border}`,
             cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center",
-            transition:"all 0.15s", fontSize:16,
+            transition:"all 0.15s", fontSize:17, flexShrink:0,
           }}
           onMouseEnter={e => e.currentTarget.style.borderColor=T.accent+"66"}
           onMouseLeave={e => e.currentTarget.style.borderColor=T.border}
           title="Toggle theme"
           >{dark ? "☀️" : "🌙"}</button>
+
         </div>
       </div>
     </div>
@@ -642,10 +699,7 @@ function TechStackPage({ T, onBack }) {
                       />
                     )}
                     <div>
-                      <div style={{ fontSize:13, fontWeight:700, color:T.text, fontFamily:FONT, marginBottom:4 }}>{name}</div>
-                      {STACK_DESC[name] && (
-                        <div style={{ fontSize:11, color:T.textMuted, fontFamily:FONT, lineHeight:1.6 }}>{STACK_DESC[name]}</div>
-                      )}
+                      <div style={{ fontSize:13, fontWeight:700, color:T.text, fontFamily:FONT }}>{name}</div>
                     </div>
                   </div>
                 ))}
@@ -671,7 +725,7 @@ function HomePage({ T, onNav }) {
             <ProjectsCard    T={T} index={2} onViewAll={() => onNav("projects")}/>
           </div>
           {/* RIGHT — stagger 1, 2, 3, 4 (slightly offset from left) */}
-          <div style={{ display:"flex", flexDirection:"column", gap:16, position:"sticky", top:110 }}>
+          <div style={{ display:"flex", flexDirection:"column", gap:16, position:"sticky", top:24 }}>
             <ExperienceCard  T={T} index={1}/>
             <NetworkCard     T={T} index={2}/>
             <LearningCard    T={T} index={3}/>
